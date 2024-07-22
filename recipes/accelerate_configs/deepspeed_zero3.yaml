@@ -15,8 +15,6 @@ mixed_precision: bf16
 num_machines: 8
 num_processes: 1
 rdzv_backend: static
-rdzv_params:
-  rdzv_endpoint: "${MASTER_ADDR}:${MASTER_PORT}"
 same_network: true
 tpu_env: []
 tpu_use_cluster: false
