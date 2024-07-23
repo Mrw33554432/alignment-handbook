@@ -187,6 +187,7 @@ def main():
     #########################
     # Instantiate DPO trainer
     #########################
+    print('generate_during_eval=False')
     trainer = DPOTrainer(
         model,
         ref_model,
