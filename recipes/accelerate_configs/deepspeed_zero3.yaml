@@ -12,7 +12,7 @@ downcast_bf16: 'no'
 enable_cpu_affinity: false
 dynamo_backend: 'NO'
 num_processes: 2
-mixed_precision: bf16
+bf16: true
 main_training_function: main
 rdzv_backend: static
 same_network: true
