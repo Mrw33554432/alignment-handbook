@@ -19,8 +19,6 @@ import sys
 
 import torch
 import transformers
-from transformers import AutoModelForCausalLM, set_seed
-
 from alignment import (
     DataArguments,
     DPOConfig,
@@ -37,8 +35,8 @@ from alignment import (
     is_adapter_model,
 )
 from peft import PeftConfig, PeftModel
-from trl import DPOTrainer
-
+from transformers import AutoModelForCausalLM, set_seed
+from trl import DPOConfig, DPOTrainer
 
 logger = logging.getLogger(__name__)
 
@@ -123,7 +121,7 @@ def main():
     )
     num_filtered_train_samples = num_raw_train_samples - len(raw_datasets["train"])
     logger.info(
-        f"Decontaminated {num_filtered_train_samples} ({num_filtered_train_samples/num_raw_train_samples * 100:.2f}%) samples from the training set."
+        f"Decontaminated {num_filtered_train_samples} ({num_filtered_train_samples / num_raw_train_samples * 100:.2f}%) samples from the training set."
     )
 
     # Replace column names with what TRL needs, text_chosen -> chosen and text_rejected -> rejected
@@ -188,21 +186,23 @@ def main():
     # Instantiate DPO trainer
     #########################
     print('generate_during_eval=False')
+    config = DPOConfig(beta=training_args.beta,
+                       generate_during_eval=False,
+                       max_length=training_args.max_length,
+                       max_prompt_length=training_args.max_prompt_length,
+                       output_dir=''
+                       )
     trainer = DPOTrainer(
         model,
         ref_model,
         model_init_kwargs=model_kwargs,
         ref_model_init_kwargs=ref_model_kwargs,
-        args=training_args,
-        beta=training_args.beta,
+        args=config,
         train_dataset=raw_datasets["train"],
         eval_dataset=raw_datasets["test"],
         tokenizer=tokenizer,
-        max_length=training_args.max_length,
-        max_prompt_length=training_args.max_prompt_length,
         peft_config=get_peft_config(model_args),
         loss_type=training_args.loss_type,
-        generate_during_eval=False
     )
 
     ###############
