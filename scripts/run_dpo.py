@@ -191,6 +191,7 @@ def main():
                        max_length=training_args.max_length,
                        max_prompt_length=training_args.max_prompt_length,
                        output_dir=training_args.output_dir,
+                       bf16=training_args.bf16,
                        )
     trainer = DPOTrainer(
         model,
