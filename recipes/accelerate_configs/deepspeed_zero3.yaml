@@ -9,7 +9,7 @@ deepspeed_config:
   zero_stage: 3
 distributed_type: DEEPSPEED
 downcast_bf16: 'no'
-machine_rank: 0
+machine_rank: 7
 main_training_function: main
 mixed_precision: bf16
 num_machines: 8
