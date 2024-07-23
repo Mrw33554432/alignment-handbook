@@ -7,9 +7,11 @@ deepspeed_config:
   zero3_init_flag: true
   zero3_save_16bit_model: true
   zero_stage: 3
+main_process_ip: $MASTER_ADDR
+main_process_port: $MASTER_PORT
 distributed_type: DEEPSPEED
 downcast_bf16: 'no'
-machine_rank: 1
+machine_rank: 6
 main_training_function: main
 mixed_precision: bf16
 num_machines: 8
