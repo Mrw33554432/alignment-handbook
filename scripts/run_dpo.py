@@ -190,7 +190,7 @@ def main():
                        generate_during_eval=False,
                        max_length=training_args.max_length,
                        max_prompt_length=training_args.max_prompt_length,
-                       output_dir=''
+                       output_dir=training_args.output_dir,
                        )
     trainer = DPOTrainer(
         model,
