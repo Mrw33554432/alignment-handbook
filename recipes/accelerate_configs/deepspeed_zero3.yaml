@@ -12,12 +12,7 @@ downcast_bf16: 'no'
 enable_cpu_affinity: false
 dynamo_backend: 'NO'
 #mixed_precision: 'bf16'
-machine_rank: $RANK
-main_process_ip: $MASTER_ADDR
-main_process_port: $MASTER_PORT
 main_training_function: main
-num_machines: $WORLD_SIZE
-num_processes: $WORLD_SIZE
 rdzv_backend: static
 same_network: true
 tpu_env: []
