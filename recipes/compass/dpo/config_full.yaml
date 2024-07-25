@@ -1,0 +1,50 @@
+# Model arguments
+model_name_or_path: xxx
+torch_dtype: bfloat16
+
+# Data training arguments
+# For definitions, see: src/h4/training/config.py
+chat_template: "{% for message in messages %}\n{% if message['role'] == 'user' %}\n{{ '<Human>: ' + message['content'] + ' '}}{% elif message['role'] == 'assistant' %}\n{{ '<AI>: '  + message['content'] + ' ' + eos_token + ' ' }}{% endif %}\n{% if loop.last and add_generation_prompt %}\n{{ '<AI>: ' }}{% endif %}\n{% endfor %}"
+
+dataset_mixer:
+  HuggingFaceH4/ultrafeedback_binarized: 0.1
+  #HuggingFaceH4/orca_dpo_pairs: 1.0
+dataset_splits:
+- train_prefs
+- test_prefs
+
+preprocessing_num_workers: 12
+auto_insert_empty_system_msg: False
+
+# Model arguments
+trust_remote_code: True
+use_flash_attention_2: True
+
+# DPOTrainer arguments
+bf16: true
+beta: 0.05
+do_eval: false
+evaluation_strategy: steps
+eval_steps: 100000
+gradient_accumulation_steps: 1
+gradient_checkpointing: true
+gradient_checkpointing_kwargs:
+  use_reentrant: False
+hub_model_id: compass-13b-dpo-v0.1
+learning_rate: 5.0e-7
+log_level: info
+logging_steps: 10
+lr_scheduler_type: cosine
+max_length: 4096
+max_prompt_length: 2048
+num_train_epochs: 3
+optim: adamw_torch
+output_dir: xxx
+per_device_train_batch_size: 2
+per_device_eval_batch_size: 4
+push_to_hub: false
+report_to:
+- tensorboard
+save_strategy: "epoch"
+seed: 42
+warmup_ratio: 0.1
