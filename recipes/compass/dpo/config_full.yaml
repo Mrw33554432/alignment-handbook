@@ -1,6 +1,6 @@
 # Model arguments
 model_name_or_path: /home/work/willchenfile_2/compass13B_dpo_zl
-torch_dtype: bfloat16
+torch_dtype: null
 
 # Data training arguments
 # For definitions, see: src/h4/training/config.py
