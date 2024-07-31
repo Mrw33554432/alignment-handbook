@@ -1,6 +1,6 @@
 # Model arguments
 model_name_or_path: /home/work/SFT-test-sw/compass13B_dpo_zl/
-torch_dtype: null
+torch_dtype: bfloat16
 
 # Data training arguments
 # For definitions, see: src/h4/training/config.py
@@ -18,7 +18,7 @@ auto_insert_empty_system_msg: False
 
 # Model arguments
 trust_remote_code: True
-# attn_implementation: flash_attention_2
+attn_implementation: flash_attention_2
 
 # DPOTrainer arguments
 bf16: true
@@ -40,8 +40,8 @@ max_prompt_length: 2048
 num_train_epochs: 3
 optim: adamw_torch
 output_dir: compass
-per_device_train_batch_size: 1
-per_device_eval_batch_size: 2
+per_device_train_batch_size: 2
+per_device_eval_batch_size: 4
 push_to_hub: false
 report_to:
 - tensorboard
