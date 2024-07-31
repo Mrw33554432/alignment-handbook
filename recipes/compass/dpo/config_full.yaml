@@ -18,7 +18,7 @@ auto_insert_empty_system_msg: False
 
 # Model arguments
 trust_remote_code: True
-attn_implementation: flash_attention_2
+# attn_implementation: flash_attention_2
 
 # DPOTrainer arguments
 bf16: true
